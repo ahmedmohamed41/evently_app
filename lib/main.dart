@@ -20,7 +20,7 @@ class EventlyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeManager.light,
         onGenerateRoute: RoutesManager.router,
-        initialRoute: RoutesManager.register,
+        initialRoute: RoutesManager.login,
       ),
     );
   }

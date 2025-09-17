@@ -10,6 +10,7 @@ class CustomButtomText extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: Text(
+        textAlign: TextAlign.end,
         text,
         style: GoogleFonts.inter(
           fontStyle: FontStyle.italic,
