@@ -1,5 +1,7 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
+import 'package:evently_app/core/resources/validators.dart';
+import 'package:evently_app/core/routes/routes_manager.dart';
 import 'package:evently_app/core/widgets/custom_buttom_text.dart';
 import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
@@ -16,17 +18,39 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+  }
+
   bool securePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: MediaQuery.of(context).viewInsets.top.h,
-          ),
-          child: SafeArea(
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: 8,
+          right: 8,
+          top: 47,
+          bottom: MediaQuery.of(context).viewInsets.top.h,
+        ),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -36,9 +60,16 @@ class _LoginState extends State<Login> {
                   height: 186.h,
                 ),
                 SizedBox(height: 24.h),
-                CustomTextFormField(text: 'Email', prefixIcon: Icons.email),
+                CustomTextFormField(
+                  controller: _emailController,
+                  validator: Validator.validateEmail,
+                  text: 'Email',
+                  prefixIcon: Icons.email,
+                ),
                 SizedBox(height: 16.h),
                 CustomTextFormField(
+                  controller: _passwordController,
+                  validator: Validator.validatePassword,
                   obscureText: securePassword,
                   text: 'Password',
                   prefixIcon: Icons.lock,
@@ -53,23 +84,30 @@ class _LoginState extends State<Login> {
                 SizedBox(height: 16.h),
                 CustomButtomText(text: 'Forget Password?'),
                 SizedBox(height: 16.h),
-                CustomElevatedButton(title: 'Login'),
+                CustomElevatedButton(onPressed: _loginAccount, title: 'Login'),
                 SizedBox(height: 24.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Don’t Have Account ? ',
+                      "Don't Have Account ? ",
                       style: GoogleFonts.inter(
                         color: ColorsManager.black1c,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    CustomButtomText(text: 'Create Account'),
+                    CustomButtomText(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                          context,
+                          RoutesManager.register,
+                        );
+                      },
+                      text: 'Create Account',
+                    ),
                   ],
                 ),
-
                 SizedBox(height: 34.h),
                 Row(
                   children: [
@@ -133,5 +171,9 @@ class _LoginState extends State<Login> {
     setState(() {
       securePassword = !securePassword;
     });
+  }
+
+  void _loginAccount() {
+    if (_formKey.currentState?.validate() == false) return;
   }
 }

@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButtomText extends StatelessWidget {
-  const CustomButtomText({super.key, required this.text});
+  const CustomButtomText({super.key, required this.text, this.onTap});
   final String text;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Text(
         textAlign: TextAlign.end,
         text,
