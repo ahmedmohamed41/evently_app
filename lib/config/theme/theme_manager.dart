@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ThemeManager {
   static final ThemeData light = ThemeData(
+    textTheme: TextTheme(bodyMedium: TextStyle(color: Colors.black)),
     appBarTheme: AppBarTheme(
       centerTitle: true,
       foregroundColor: ColorsManager.blue,
@@ -14,6 +15,7 @@ class ThemeManager {
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 30.w),
         backgroundColor: ColorsManager.blue,
+        foregroundColor: ColorsManager.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(16),
         ),

@@ -146,7 +146,7 @@ class _LoginState extends State<Login> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(ImagesAssets.googleIcon),
+                      SvgPicture.asset(ImagesAssets.googleIconSvg),
                       SizedBox(width: 10),
                       Text(
                         'Login With Google',
