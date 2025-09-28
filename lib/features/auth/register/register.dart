@@ -68,14 +68,14 @@ class _RegisterState extends State<Register> {
                 CustomTextFormField(
                   controller: _nameController,
                   validator: Validator.validateName,
-                  text: 'Name',
+                  labelText: 'Name',
                   prefixIcon: Icons.person,
                 ),
                 SizedBox(height: 16.h),
                 CustomTextFormField(
                   controller: _emailController,
                   validator: Validator.validateEmail,
-                  text: 'Email',
+                  labelText: 'Email',
                   prefixIcon: Icons.email,
                 ),
                 SizedBox(height: 16.h),
@@ -83,7 +83,7 @@ class _RegisterState extends State<Register> {
                   controller: _passwordController,
                   validator: Validator.validatePassword,
                   obscureText: securePassword,
-                  text: 'Password',
+                  labelText: 'Password',
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: _onClickedPasswordSecure,
@@ -106,7 +106,7 @@ class _RegisterState extends State<Register> {
                     return null;
                   },
                   obscureText: secureRePassword,
-                  text: 'Re Password',
+                  labelText: 'Re Password',
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: _onClickedRePasswordSecure,

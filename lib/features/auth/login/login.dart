@@ -1,7 +1,7 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/resources/validators.dart';
-import 'package:evently_app/core/routes/routes_manager.dart';
+import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/widgets/custom_buttom_text.dart';
 import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                 CustomTextFormField(
                   controller: _emailController,
                   validator: Validator.validateEmail,
-                  text: 'Email',
+                  labelText: 'Email',
                   prefixIcon: Icons.email,
                 ),
                 SizedBox(height: 16.h),
@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
                   controller: _passwordController,
                   validator: Validator.validatePassword,
                   obscureText: securePassword,
-                  text: 'Password',
+                  labelText: 'Password',
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: _onClickedPasswordSecure,
@@ -101,7 +101,7 @@ class _LoginState extends State<Login> {
                       onTap: () {
                         Navigator.pushReplacementNamed(
                           context,
-                          RoutesManager.register,
+                          AppRoutes.register,
                         );
                       },
                       text: 'Create Account',

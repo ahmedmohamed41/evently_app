@@ -21,7 +21,7 @@ class OnboardingItem extends StatelessWidget {
             children: [
               Text(
                 model.title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: ColorsManager.blue,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -29,12 +29,12 @@ class OnboardingItem extends StatelessWidget {
               ),
               SizedBox(height: 20.h),
               model.subTitle == ''
-                  ? SizedBox()
+                  ? const SizedBox()
                   : Expanded(
                       flex: 1,
                       child: Text(
                         model.subTitle,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),

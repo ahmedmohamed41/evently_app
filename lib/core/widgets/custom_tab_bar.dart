@@ -28,7 +28,13 @@ class _CustomTabBarState extends State<CustomTabBar> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: widget.categories.length,
+<<<<<<< HEAD
       child: TabBar(
+=======
+
+      child: TabBar(
+       
+>>>>>>> developer
         onTap: (value) {
           setState(() {
             isSelected = value;

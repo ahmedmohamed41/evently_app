@@ -5,4 +5,8 @@ class AppRoutes {
   static const String onboardingStart = '/onboardingStart';
   static const String onboarding = '/onboarding';
   static const String mainLayout = '/mainLayout';
+<<<<<<< HEAD
+=======
+  static const String createEvent = '/createEvent';
+>>>>>>> developer
 }
