@@ -1,3 +1,4 @@
+import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/features/main_layout/favourite/favourite_tab.dart';
 import 'package:evently_app/features/main_layout/home/home_tab.dart';
 import 'package:evently_app/features/main_layout/map/map_tab.dart';
@@ -12,16 +13,26 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
-  List<Widget> tabs = [const HomeTab(), const MapTab(), const FavouriteTab(), const ProfileTap()];
+  List<Widget> tabs = [
+    const HomeTab(),
+    const MapTab(),
+    const FavouriteTab(),
+    const ProfileTap(),
+  ];
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: tabs[selectedIndex],
       bottomNavigationBar: _bottomNavigationBar(),
-      floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked ,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            AppRoutes.createEvent,
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );

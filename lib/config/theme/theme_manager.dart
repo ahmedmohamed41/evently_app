@@ -8,6 +8,15 @@ class ThemeManager {
     useMaterial3: false,
     primaryColor: ColorsManager.blue,
     scaffoldBackgroundColor: ColorsManager.whiteBlue,
+    appBarTheme: AppBarTheme(
+      backgroundColor: ColorsManager.whiteBlue,
+      titleTextStyle: GoogleFonts.inter(
+        color: ColorsManager.blue,
+        fontSize: 25,
+       
+      ),
+      centerTitle: true,
+    ),
     colorScheme: ColorScheme.fromSeed(
       seedColor: ColorsManager.blue,
       primary: ColorsManager.whiteBlue,
@@ -15,6 +24,7 @@ class ThemeManager {
       secondary: Colors.transparent,
       onSecondary: ColorsManager.whiteBlue,
     ),
+
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: ColorsManager.blue,
       type: BottomNavigationBarType.fixed,

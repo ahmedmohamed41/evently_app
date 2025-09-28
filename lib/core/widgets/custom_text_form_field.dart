@@ -6,14 +6,18 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
-    required this.text,
+    this.maxLines=1,
+    this.labelText,
     this.prefixIcon,
+    this.hintText,
     this.suffixIcon,
     this.obscureText = false,
     this.validator,
-    this.controller
+    this.controller,
   });
-  final String text;
+  final String? labelText;
+  final int? maxLines;
+  final String? hintText;
   final IconData? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
@@ -22,11 +26,14 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines,
       controller: controller,
-      validator:validator,
+      validator: validator,
       obscureText: obscureText,
       decoration: InputDecoration(
-        labelText: text,
+        hintText: hintText,
+
+        labelText: labelText,
         labelStyle: GoogleFonts.inter(
           color: ColorsManager.grey,
           fontSize: 16,
