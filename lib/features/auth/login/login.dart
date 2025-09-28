@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                 CustomTextFormField(
                   controller: _emailController,
                   validator: Validator.validateEmail,
-                  text: 'Email',
+                  labelText: 'Email',
                   prefixIcon: Icons.email,
                 ),
                 SizedBox(height: 16.h),
@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
                   controller: _passwordController,
                   validator: Validator.validatePassword,
                   obscureText: securePassword,
-                  text: 'Password',
+                  labelText: 'Password',
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: _onClickedPasswordSecure,
