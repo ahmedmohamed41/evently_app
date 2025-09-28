@@ -82,7 +82,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 SizedBox(height: 16.h),
-                CustomButtomText(text: 'Forget Password?'),
+                const CustomButtomText(text: 'Forget Password?'),
                 SizedBox(height: 16.h),
                 CustomElevatedButton(onPressed: _loginAccount, title: 'Login'),
                 SizedBox(height: 24.h),
@@ -111,7 +111,7 @@ class _LoginState extends State<Login> {
                 SizedBox(height: 34.h),
                 Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Divider(
                         indent: 26,
                         endIndent: 16,
@@ -126,7 +126,7 @@ class _LoginState extends State<Login> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Divider(
                         indent: 16,
                         endIndent: 26,
@@ -140,14 +140,14 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.symmetric(vertical: 17.h),
                   shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadiusGeometry.circular(16.r),
-                    side: BorderSide(color: ColorsManager.blue),
+                    side: const BorderSide(color: ColorsManager.blue),
                   ),
                   onPressed: () {},
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SvgPicture.asset(ImagesAssets.googleIconSvg),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
                         'Login With Google',
                         style: GoogleFonts.inter(

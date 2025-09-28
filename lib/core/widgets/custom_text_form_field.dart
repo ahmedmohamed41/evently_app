@@ -38,19 +38,19 @@ class CustomTextFormField extends StatelessWidget {
         suffixIcon: suffixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.r),
-          borderSide: BorderSide(color: ColorsManager.grey),
+          borderSide: const BorderSide(color: ColorsManager.grey),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.r),
-          borderSide: BorderSide(color: ColorsManager.grey),
+          borderSide: const BorderSide(color: ColorsManager.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.r),
-          borderSide: BorderSide(color: ColorsManager.grey),
+          borderSide: const BorderSide(color: ColorsManager.grey),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.r),
-          borderSide: BorderSide(color: ColorsManager.red),
+          borderSide: const BorderSide(color: ColorsManager.red),
         ),
       ),
     );

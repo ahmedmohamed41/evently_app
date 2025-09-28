@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ThemeManager {
   static final ThemeData light = ThemeData(
-    textTheme: TextTheme(bodyMedium: TextStyle(color: Colors.black)),
-    appBarTheme: AppBarTheme(
+    textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.black)),
+    appBarTheme: const AppBarTheme(
       centerTitle: true,
       foregroundColor: ColorsManager.blue,
       backgroundColor: ColorsManager.whiteBlue,

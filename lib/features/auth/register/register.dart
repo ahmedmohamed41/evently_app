@@ -1,7 +1,7 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/resources/validators.dart';
-import 'package:evently_app/core/routes/routes_manager.dart';
+import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/widgets/custom_buttom_text.dart';
 import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
@@ -139,7 +139,7 @@ class _RegisterState extends State<Register> {
                       onTap: () {
                         Navigator.pushReplacementNamed(
                           context,
-                          RoutesManager.login,
+                          AppRoutes.login,
                         );
                       },
                       text: 'Login',
