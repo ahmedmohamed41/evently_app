@@ -1,5 +1,5 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
-import 'package:evently_app/core/routes/routes_manager.dart';
+import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,9 +17,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigator() {
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
-        Navigator.pushReplacementNamed(context, RoutesManager.onboardingStart);
+        Navigator.pushReplacementNamed(context, AppRoutes.onboardingStart);
       }
     });
   }
