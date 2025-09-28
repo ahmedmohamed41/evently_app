@@ -1,6 +1,6 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
-import 'package:evently_app/core/routes/routes_manager.dart';
+import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/features/on_boarding/onboarding_item.dart';
 import 'package:evently_app/features/on_boarding/widgets/custom_dots_indicator.dart';
 import 'package:evently_app/models/onboarding_model.dart';
@@ -73,7 +73,7 @@ class _OnboardingScreenBodyState extends State<OnboardingScreenBody> {
                         onPressed: () {
                           _previousPage();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_circle_left_outlined,
                           size: 37,
                           color: ColorsManager.blue,
@@ -84,7 +84,7 @@ class _OnboardingScreenBodyState extends State<OnboardingScreenBody> {
                   onPressed: () {
                     _nextPage(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_circle_right_outlined,
                     size: 37,
                     color: ColorsManager.blue,
@@ -102,7 +102,7 @@ class _OnboardingScreenBodyState extends State<OnboardingScreenBody> {
     if (pos > 0) {
       controller.previousPage(
         curve: Curves.linear,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
       );
       setState(() {
         pos--;
@@ -114,13 +114,13 @@ class _OnboardingScreenBodyState extends State<OnboardingScreenBody> {
     if (pos < 2) {
       controller.nextPage(
         curve: Curves.linear,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
       );
       setState(() {
         pos++;
       });
     } else {
-      Navigator.pushReplacementNamed(context, RoutesManager.home);
+      Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
     }
   }
 }

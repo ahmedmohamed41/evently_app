@@ -1,6 +1,6 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
-import 'package:evently_app/core/routes/routes_manager.dart';
+import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/features/on_boarding/onboarding_item.dart';
 import 'package:evently_app/models/onboarding_model.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class OnboardingScreenStart extends StatelessWidget {
                 flex: 1,
                 child: Row(
                   children: [
-                    Text(
+                    const Text(
                       'Language',
                       style: TextStyle(
                         color: ColorsManager.blue,
@@ -41,10 +41,10 @@ class OnboardingScreenStart extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.flag_circle_rounded),
+                      icon: const Icon(Icons.flag_circle_rounded),
                     ),
                   ],
                 ),
@@ -53,7 +53,7 @@ class OnboardingScreenStart extends StatelessWidget {
                 flex: 1,
                 child: Row(
                   children: [
-                    Text(
+                    const Text(
                       'Language',
                       style: TextStyle(
                         color: ColorsManager.blue,
@@ -61,10 +61,10 @@ class OnboardingScreenStart extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.flag_circle_rounded),
+                      icon: const Icon(Icons.flag_circle_rounded),
                     ),
                   ],
                 ),
@@ -74,10 +74,10 @@ class OnboardingScreenStart extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacementNamed(
                     context,
-                    RoutesManager.onboarding,
+                    AppRoutes.onboarding,
                   );
                 },
-                child: Text(
+                child: const Text(
                   'Let’s Start',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
