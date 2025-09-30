@@ -12,12 +12,12 @@ class CustomTabBar extends StatefulWidget {
     required this.categories,
     this.onCategoryItemClicked,
   });
+
   final Color selectedTapBgColor;
   final Color selectedTapFgColor;
   final Color unSelectedTapBgColor;
   final Color unSelectedTapFgColor;
   final void Function(CategoryModel)? onCategoryItemClicked;
-
   final List<CategoryModel> categories;
 
   @override
@@ -26,11 +26,11 @@ class CustomTabBar extends StatefulWidget {
 
 class _CustomTabBarState extends State<CustomTabBar> {
   int isSelected = 0;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: widget.categories.length,
-
       child: TabBar(
         onTap: (value) {
           widget.onCategoryItemClicked?.call(widget.categories[value]);
@@ -47,11 +47,8 @@ class _CustomTabBarState extends State<CustomTabBar> {
                 unSelectedTapFgColor: widget.unSelectedTapFgColor,
                 unSelectedTapBgColor: widget.unSelectedTapBgColor,
                 category: category,
-                isSelected:
-                    isSelected ==
-                    widget.categories.indexOf(
-                      category,
-                    ),
+                isSelected: isSelected ==
+                    widget.categories.indexOf(category),
               ),
             )
             .toList(),

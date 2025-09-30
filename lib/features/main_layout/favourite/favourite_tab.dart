@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+import 'package:flutter/material.dart';
+=======
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/features/main_layout/home/event_item.dart';
 import 'package:evently_app/models/category_model.dart';
@@ -5,12 +8,20 @@ import 'package:evently_app/models/event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+>>>>>>> developer
 
 class FavouriteTab extends StatelessWidget {
   const FavouriteTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
+    return const Placeholder(
+        color: Colors.black,
+    );
+  }
+}
+=======
     return SafeArea(
       child: Column(
         children: [
@@ -65,3 +76,4 @@ class FavouriteTab extends StatelessWidget {
     );
   }
 }
+>>>>>>> developer

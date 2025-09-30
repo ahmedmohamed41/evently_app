@@ -23,7 +23,10 @@ class TabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+<<<<<<< HEAD
+=======
 
+>>>>>>> developer
       decoration: BoxDecoration(
         color: isSelected ? selectedTapBgColor : unSelectedTapBgColor,
         borderRadius: BorderRadius.circular(46),

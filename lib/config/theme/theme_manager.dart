@@ -5,8 +5,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThemeManager {
   static final ThemeData light = ThemeData(
+<<<<<<< HEAD
+    textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.black)),
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+      foregroundColor: ColorsManager.blue,
+      backgroundColor: ColorsManager.whiteBlue,
+    ),
+=======
     useMaterial3: false,
     primaryColor: ColorsManager.blue,
+>>>>>>> developer
     scaffoldBackgroundColor: ColorsManager.whiteBlue,
     appBarTheme: AppBarTheme(
       backgroundColor: ColorsManager.whiteBlue,
