@@ -95,6 +95,7 @@ class _HomeTabState extends State<HomeTab> {
         ),
         Expanded(
           child: ListView.separated(
+            padding: REdgeInsets.only(top: 20),
             separatorBuilder: (context, index) => SizedBox(
               height: 16.h,
             ),

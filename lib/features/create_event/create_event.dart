@@ -1,4 +1,3 @@
-import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/widgets/custom_buttom_text.dart';
 import 'package:evently_app/core/widgets/custom_elevated_button.dart';
@@ -8,9 +7,15 @@ import 'package:evently_app/models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CreateEvent extends StatelessWidget {
+class CreateEvent extends StatefulWidget {
   const CreateEvent({super.key});
 
+  @override
+  State<CreateEvent> createState() => _CreateEventState();
+}
+
+class _CreateEventState extends State<CreateEvent> {
+  CategoryModel selectedCategory = CategoryModel.categories[0];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +34,18 @@ class CreateEvent extends StatelessWidget {
                 width: 361.w,
                 child: ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(16),
-                  child: Image.asset(ImagesAssets.bookClub),
+                  child: Image.asset(selectedCategory.imagePath),
                 ),
               ),
               SizedBox(
                 height: 16.h,
               ),
               CustomTabBar(
+                onCategoryItemClicked: (category) {
+                  setState(() {
+                    selectedCategory = category;
+                  });
+                },
                 categories: CategoryModel.categories,
                 selectedTapBgColor: ColorsManager.blue,
                 selectedTapFgColor: ColorsManager.white,
@@ -84,7 +94,14 @@ class CreateEvent extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const Spacer(),
-                  const CustomButtomText(
+                  CustomButtomText(
+                    onTap: () {
+                      showDatePicker(
+                        context: context,
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                      );
+                    },
                     text: 'Choose Date',
                   ),
                 ],
@@ -103,7 +120,13 @@ class CreateEvent extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const Spacer(),
-                  const CustomButtomText(
+                  CustomButtomText(
+                    onTap: () {
+                      showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
+                    },
                     text: 'Choose Time',
                   ),
                 ],
@@ -111,7 +134,6 @@ class CreateEvent extends StatelessWidget {
               SizedBox(
                 height: 16.h,
               ),
-
               CustomElevatedButton(
                 onPressed: () {},
                 title: 'Add Event',
