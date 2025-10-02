@@ -70,7 +70,7 @@ class ProfileTap extends StatelessWidget {
           menuItems: ['Light', 'Dark'],
         ),
         Padding(
-          padding: REdgeInsets.only(left: 16, right: 16, top: 270),
+          padding: REdgeInsets.only(left: 16, right: 16, top: 260),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               padding: REdgeInsets.all(16),
