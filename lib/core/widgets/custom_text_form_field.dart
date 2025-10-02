@@ -1,12 +1,9 @@
-import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
-    this.maxLines=1,
+    this.maxLines = 1,
     this.labelText,
     this.prefixIcon,
     this.hintText,
@@ -32,33 +29,13 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hintText,
-
+        hintStyle: Theme.of(context).textTheme.bodySmall,
         labelText: labelText,
-        labelStyle: GoogleFonts.inter(
-          color: ColorsManager.grey,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
+       
         prefixIcon: prefixIcon == null
             ? null
-            : Icon(prefixIcon, color: ColorsManager.grey),
+            : Icon(prefixIcon,),
         suffixIcon: suffixIcon,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.r),
-          borderSide: const BorderSide(color: ColorsManager.grey),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.r),
-          borderSide: const BorderSide(color: ColorsManager.grey),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.r),
-          borderSide: const BorderSide(color: ColorsManager.grey),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.r),
-          borderSide: const BorderSide(color: ColorsManager.red),
-        ),
       ),
     );
   }

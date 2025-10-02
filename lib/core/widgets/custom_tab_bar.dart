@@ -32,6 +32,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
       length: widget.categories.length,
 
       child: TabBar(
+        indicatorColor: Colors.transparent,
         onTap: (value) {
           widget.onCategoryItemClicked?.call(widget.categories[value]);
           setState(() {

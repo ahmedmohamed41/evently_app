@@ -1,5 +1,4 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
-import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/resources/validators.dart';
 import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/widgets/custom_buttom_text.dart';
@@ -7,7 +6,6 @@ import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -89,7 +87,6 @@ class _RegisterState extends State<Register> {
                     onPressed: _onClickedPasswordSecure,
                     icon: Icon(
                       securePassword ? Icons.visibility_off : Icons.visibility,
-                      color: ColorsManager.grey,
                     ),
                   ),
                 ),
@@ -114,7 +111,6 @@ class _RegisterState extends State<Register> {
                       secureRePassword
                           ? Icons.visibility_off
                           : Icons.visibility,
-                      color: ColorsManager.grey,
                     ),
                   ),
                 ),
@@ -129,11 +125,7 @@ class _RegisterState extends State<Register> {
                   children: [
                     Text(
                       'Already Have Account ? ',
-                      style: GoogleFonts.inter(
-                        color: ColorsManager.black1c,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     CustomButtomText(
                       onTap: () {

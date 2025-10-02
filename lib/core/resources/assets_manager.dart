@@ -7,6 +7,7 @@ class ImagesAssets {
   static const String onboarding2 = '$base/onboarding2.png';
   static const String onboarding3 = '$base/onboarding3.png';
   static const String onboarding4 = '$base/onboarding4.png';
+  static const String profileImage = '$base/profile_image-1.png';
   //////////////////////////////////////////////////////////
   static const String meeting = '$base/meeting.png';
   static const String birthday = '$base/birthday.png';

@@ -48,7 +48,11 @@ class _CreateEventState extends State<CreateEvent> {
                 },
                 categories: CategoryModel.categories,
                 selectedTapBgColor: ColorsManager.blue,
-                selectedTapFgColor: ColorsManager.white,
+                selectedTapFgColor:
+                    MediaQuery.of(context).platformBrightness ==
+                        Brightness.light
+                    ? ColorsManager.white
+                    : ColorsManager.darkBlue,
                 unSelectedTapBgColor: Colors.transparent,
                 unSelectedTapFgColor: ColorsManager.blue,
               ),

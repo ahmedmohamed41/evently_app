@@ -16,11 +16,12 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness;
     return Column(
       children: [
         Container(
           decoration: BoxDecoration(
-            color: ColorsManager.blue,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20.r)),
           ),
           child: SafeArea(
@@ -68,12 +69,13 @@ class _HomeTabState extends State<HomeTab> {
                         margin: const EdgeInsets.only(left: 10),
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: ColorsManager.white,
+                          color: ColorsManager.ofWhite,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           'EN',
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.headlineMedium
+                              
                         ),
                       ),
                     ],
@@ -83,10 +85,16 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                   CustomTabBar(
                     categories: CategoryModel.categoriesWithAll,
-                    selectedTapBgColor: ColorsManager.whiteBlue,
-                    selectedTapFgColor: ColorsManager.blue,
+                    selectedTapBgColor: isDark == Brightness.light
+                        ? ColorsManager.whiteBlue
+                        : ColorsManager.blue,
+                    selectedTapFgColor: isDark == Brightness.light
+                        ? ColorsManager.blue
+                        : ColorsManager.whiteBlue,
                     unSelectedTapFgColor: ColorsManager.whiteBlue,
-                    unSelectedTapBgColor: ColorsManager.blue,
+                    unSelectedTapBgColor: isDark == Brightness.light
+                        ? ColorsManager.blue
+                        : Colors.transparent,
                   ),
                 ],
               ),

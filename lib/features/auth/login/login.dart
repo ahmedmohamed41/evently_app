@@ -77,7 +77,6 @@ class _LoginState extends State<Login> {
                     onPressed: _onClickedPasswordSecure,
                     icon: Icon(
                       securePassword ? Icons.visibility_off : Icons.visibility,
-                      color: ColorsManager.grey,
                     ),
                   ),
                 ),
@@ -91,11 +90,7 @@ class _LoginState extends State<Login> {
                   children: [
                     Text(
                       "Don't Have Account ? ",
-                      style: GoogleFonts.inter(
-                        color: ColorsManager.black1c,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     CustomButtomText(
                       onTap: () {

@@ -19,8 +19,9 @@ class EventlyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.light(),
-        darkTheme: ThemeManager.light,
+        theme: ThemeManager.light,
+        darkTheme: ThemeManager.dark,
+        themeMode: ThemeMode.light,
         onGenerateRoute: RoutesManager.router,
         initialRoute: AppRoutes.mainLayout,
       ),

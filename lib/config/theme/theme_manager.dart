@@ -5,26 +5,25 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThemeManager {
   static final ThemeData light = ThemeData(
+    brightness: Brightness.light,
     useMaterial3: false,
     primaryColor: ColorsManager.blue,
+    cardTheme: CardThemeData(
+      color: ColorsManager.whiteBlue,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(8),
+      ),
+    ),
     scaffoldBackgroundColor: ColorsManager.whiteBlue,
     appBarTheme: AppBarTheme(
       backgroundColor: ColorsManager.whiteBlue,
       titleTextStyle: GoogleFonts.inter(
         color: ColorsManager.blue,
         fontSize: 25,
-       
       ),
       centerTitle: true,
+      foregroundColor: ColorsManager.blue,
     ),
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: ColorsManager.blue,
-      primary: ColorsManager.whiteBlue,
-      onPrimary: ColorsManager.blue,
-      secondary: Colors.transparent,
-      onSecondary: ColorsManager.whiteBlue,
-    ),
-
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: ColorsManager.blue,
       type: BottomNavigationBarType.fixed,
@@ -119,23 +118,33 @@ class ThemeManager {
         fontWeight: FontWeight.bold,
         color: ColorsManager.blue,
       ),
+      titleLarge: GoogleFonts.inter(
+        fontSize: 20.sp,
+        fontWeight: FontWeight.bold,
+        color: ColorsManager.black1c,
+      ),
     ),
   );
   static final ThemeData dark = ThemeData(
+    brightness: Brightness.dark,
     useMaterial3: false,
     primaryColor: ColorsManager.darkBlue,
-    scaffoldBackgroundColor: ColorsManager.darkBlue,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: ColorsManager.darkBlue,
-      primary: ColorsManager.darkBlue,
-      onPrimary: ColorsManager.darkBlue,
-      secondary: Colors.transparent,
-      onSecondary: ColorsManager.whiteBlue,
-    ),
-    bottomAppBarTheme: const BottomAppBarThemeData(
+    iconTheme: const IconThemeData(color: ColorsManager.ofWhite),
+    cardTheme: CardThemeData(
       color: ColorsManager.darkBlue,
-      elevation: 16,
-      shape: CircularNotchedRectangle(),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(8),
+      ),
+    ),
+    scaffoldBackgroundColor: ColorsManager.darkBlue,
+    appBarTheme: AppBarTheme(
+      backgroundColor: ColorsManager.darkBlue,
+      titleTextStyle: GoogleFonts.inter(
+        color: ColorsManager.blue,
+        fontSize: 25,
+      ),
+      centerTitle: true,
+      foregroundColor: ColorsManager.blue,
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: ColorsManager.darkBlue,
@@ -146,7 +155,7 @@ class ThemeManager {
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: ColorsManager.darkBlue,
-      foregroundColor: ColorsManager.white,
+      foregroundColor: ColorsManager.ofWhite,
       shape: StadiumBorder(
         side: BorderSide(color: ColorsManager.white, width: 4),
       ),
@@ -154,7 +163,7 @@ class ThemeManager {
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14.r),
-        borderSide: BorderSide(color: ColorsManager.grey, width: 1.w),
+        borderSide: BorderSide(color: ColorsManager.blue, width: 1.w),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14.r),
@@ -169,12 +178,12 @@ class ThemeManager {
         borderSide: BorderSide(color: ColorsManager.red, width: 1.w),
       ),
       labelStyle: GoogleFonts.inter(
-        fontSize: 14.sp,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w500,
-        color: ColorsManager.grey,
+        color: ColorsManager.ofWhite,
       ),
-      prefixIconColor: ColorsManager.grey,
-      suffixIconColor: ColorsManager.grey,
+      prefixIconColor: ColorsManager.ofWhite,
+      suffixIconColor: ColorsManager.ofWhite,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -204,26 +213,31 @@ class ThemeManager {
       headlineSmall: GoogleFonts.inter(
         fontSize: 14.sp,
         fontWeight: FontWeight.w400,
-        color: ColorsManager.white,
+        color: ColorsManager.ofWhite,
       ),
       headlineMedium: GoogleFonts.inter(
         fontSize: 14.sp,
         fontWeight: FontWeight.w700,
-        color: ColorsManager.blue,
+        color: ColorsManager.darkBlue,
       ),
       headlineLarge: GoogleFonts.inter(
         fontSize: 24.sp,
         fontWeight: FontWeight.bold,
-        color: ColorsManager.white,
+        color: ColorsManager.ofWhite,
+      ),
+      titleMedium: GoogleFonts.inter(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.bold,
+        color: ColorsManager.ofWhite,
       ),
       bodySmall: GoogleFonts.inter(
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
-        color: ColorsManager.black1c,
+        color: ColorsManager.ofWhite,
       ),
-      labelSmall: TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w500,
+      bodyLarge: GoogleFonts.inter(
+        fontSize: 20.sp,
+        fontWeight: FontWeight.bold,
         color: ColorsManager.blue,
       ),
     ),
