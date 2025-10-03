@@ -4,6 +4,7 @@ import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/widgets/custom_buttom_text.dart';
 import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -43,6 +44,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(
@@ -65,23 +67,23 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 24.h),
                 CustomTextFormField(
                   controller: _nameController,
-                  validator: Validator.validateName,
-                  labelText: 'Name',
+                  validator:  (value) => Validator.validateName(value, context),
+                  labelText: appLocalizations.name,
                   prefixIcon: Icons.person,
                 ),
                 SizedBox(height: 16.h),
                 CustomTextFormField(
                   controller: _emailController,
-                  validator: Validator.validateEmail,
-                  labelText: 'Email',
+                  validator: (value) => Validator.validateEmail(value, context),
+                  labelText: appLocalizations.email,
                   prefixIcon: Icons.email,
                 ),
                 SizedBox(height: 16.h),
                 CustomTextFormField(
                   controller: _passwordController,
-                  validator: Validator.validatePassword,
+                  validator: (value) => Validator.validatePassword(value, context),
                   obscureText: securePassword,
-                  labelText: 'Password',
+                  labelText: appLocalizations.password,
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: _onClickedPasswordSecure,
@@ -95,15 +97,15 @@ class _RegisterState extends State<Register> {
                   controller: _rePasswordController,
                   validator: (input) {
                     if (input == null || input.trim().isEmpty) {
-                      return "Password is required";
+                      return AppLocalizations.of(context)!.password_is_required;
                     }
                     if (input != _passwordController.text) {
-                      return "password doesn't match";
+                      return AppLocalizations.of(context)!.password_doesnt_match;
                     }
                     return null;
                   },
                   obscureText: secureRePassword,
-                  labelText: 'Re Password',
+                  labelText: appLocalizations.re_password,
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: _onClickedRePasswordSecure,
@@ -117,14 +119,14 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 16.h),
                 CustomElevatedButton(
                   onPressed: _createAccount,
-                  title: 'Create Account',
+                  title:appLocalizations.create_account,
                 ),
                 SizedBox(height: 16.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Already Have Account ? ',
+                      '${appLocalizations.already_have_account} ',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     CustomButtomText(
@@ -134,7 +136,7 @@ class _RegisterState extends State<Register> {
                           AppRoutes.login,
                         );
                       },
-                      text: 'Login',
+                      text: appLocalizations.login,
                     ),
                   ],
                 ),

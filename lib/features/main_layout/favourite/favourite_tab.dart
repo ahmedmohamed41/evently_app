@@ -1,5 +1,6 @@
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/features/main_layout/home/event_item.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/category_model.dart';
 import 'package:evently_app/models/event_model.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class FavouriteTab extends StatelessWidget {
                   Icons.search,
                   color: ColorsManager.blue,
                 ),
-                hintText: 'Search for Event',
+                hintText: AppLocalizations.of(context)!.search_for_event,
                 hintStyle: GoogleFonts.inter(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -50,7 +51,7 @@ class FavouriteTab extends StatelessWidget {
               ),
               itemBuilder: (context, index) => EventItem(
                 event: EventModel(
-                  category: CategoryModel.categories[4],
+                  category: CategoryModel.categories(context)[4],
                   dateTime: DateTime.now(),
                   timeOfDay: TimeOfDay.now(),
                   title: 'Meeting for Updating The Development Method ',

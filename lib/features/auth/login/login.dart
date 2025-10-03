@@ -5,6 +5,7 @@ import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/widgets/custom_buttom_text.dart';
 import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -40,6 +41,7 @@ class _LoginState extends State<Login> {
   bool securePassword = true;
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(
@@ -62,16 +64,17 @@ class _LoginState extends State<Login> {
                 SizedBox(height: 24.h),
                 CustomTextFormField(
                   controller: _emailController,
-                  validator: Validator.validateEmail,
-                  labelText: 'Email',
+                  validator: (value) => Validator.validateEmail(value, context),
+                  labelText: appLocalizations.email,
                   prefixIcon: Icons.email,
                 ),
                 SizedBox(height: 16.h),
                 CustomTextFormField(
                   controller: _passwordController,
-                  validator: Validator.validatePassword,
+                  validator: (value) =>
+                      Validator.validatePassword(value, context),
                   obscureText: securePassword,
-                  labelText: 'Password',
+                  labelText: appLocalizations.password,
                   prefixIcon: Icons.lock,
                   suffixIcon: IconButton(
                     onPressed: _onClickedPasswordSecure,
@@ -81,15 +84,18 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 SizedBox(height: 16.h),
-                const CustomButtomText(text: 'Forget Password?'),
+                CustomButtomText(text: appLocalizations.forget_password),
                 SizedBox(height: 16.h),
-                CustomElevatedButton(onPressed: _loginAccount, title: 'Login'),
+                CustomElevatedButton(
+                  onPressed: _loginAccount,
+                  title: appLocalizations.login,
+                ),
                 SizedBox(height: 24.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't Have Account ? ",
+                      "${appLocalizations.dont_have_account} ",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     CustomButtomText(
@@ -99,7 +105,7 @@ class _LoginState extends State<Login> {
                           AppRoutes.register,
                         );
                       },
-                      text: 'Create Account',
+                      text: appLocalizations.create_account,
                     ),
                   ],
                 ),
@@ -114,7 +120,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Text(
-                      'or',
+                      appLocalizations.or,
                       style: GoogleFonts.inter(
                         color: ColorsManager.blue,
                         fontSize: 16,
@@ -144,7 +150,7 @@ class _LoginState extends State<Login> {
                       SvgPicture.asset(ImagesAssets.googleIconSvg),
                       const SizedBox(width: 10),
                       Text(
-                        'Login With Google',
+                        appLocalizations.login_with_google,
                         style: GoogleFonts.inter(
                           color: ColorsManager.blue,
                           fontSize: 20,

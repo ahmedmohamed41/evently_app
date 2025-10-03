@@ -3,6 +3,7 @@ import 'package:evently_app/features/main_layout/favourite/favourite_tab.dart';
 import 'package:evently_app/features/main_layout/home/home_tab.dart';
 import 'package:evently_app/features/main_layout/map/map_tab.dart';
 import 'package:evently_app/features/main_layout/profile/profile_tap.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class MainLayout extends StatefulWidget {
@@ -45,6 +46,7 @@ class _MainLayoutState extends State<MainLayout> {
   }
 
   BottomNavigationBar _bottomNavigationBar() {
+  AppLocalizations  appLocalizations = AppLocalizations.of(context)!;
     return BottomNavigationBar(
       onTap: _selectedItem,
       items: [
@@ -52,25 +54,25 @@ class _MainLayoutState extends State<MainLayout> {
           icon: selectedIndex == 0
               ? const Icon(Icons.home)
               : const Icon(Icons.home_outlined),
-          label: 'Home',
+          label: appLocalizations.home,
         ),
         BottomNavigationBarItem(
           icon: selectedIndex == 1
               ? const Icon(Icons.location_on)
               : const Icon(Icons.location_on_outlined),
-          label: 'Map',
+          label: appLocalizations.map,
         ),
         BottomNavigationBarItem(
           icon: selectedIndex == 2
               ? const Icon(Icons.favorite)
               : const Icon(Icons.favorite_border_outlined),
-          label: 'Favorite',
+          label: appLocalizations.favourite,
         ),
         BottomNavigationBarItem(
           icon: selectedIndex == 3
               ? const Icon(Icons.person)
               : const Icon(Icons.person_2_outlined),
-          label: 'Profile',
+          label: appLocalizations.profile,
         ),
       ],
     );

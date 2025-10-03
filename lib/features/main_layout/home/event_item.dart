@@ -60,11 +60,7 @@ class _EventItemState extends State<EventItem> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 8,
-                          top: 8,
-                          bottom: 8,
-                        ),
+                        padding:  REdgeInsets.all(8),
                         child: Text(
                           widget.event.title,
                           style: Theme.of(context).textTheme.titleMedium,

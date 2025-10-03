@@ -3,6 +3,7 @@ import 'package:evently_app/core/widgets/custom_buttom_text.dart';
 import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_tab_bar.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,13 +16,15 @@ class CreateEvent extends StatefulWidget {
 }
 
 class _CreateEventState extends State<CreateEvent> {
-  CategoryModel selectedCategory = CategoryModel.categories[0];
+  late CategoryModel selectedCategory;
   @override
   Widget build(BuildContext context) {
+    selectedCategory = CategoryModel.categories(context)[0];
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Create Event'),
+        title: Text(appLocalizations.create_event),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -46,7 +49,7 @@ class _CreateEventState extends State<CreateEvent> {
                     selectedCategory = category;
                   });
                 },
-                categories: CategoryModel.categories,
+                categories: CategoryModel.categories(context),
                 selectedTapBgColor: ColorsManager.blue,
                 selectedTapFgColor:
                     MediaQuery.of(context).platformBrightness ==
@@ -60,29 +63,29 @@ class _CreateEventState extends State<CreateEvent> {
                 height: 16.h,
               ),
               Text(
-                'Title',
+                appLocalizations.title,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               SizedBox(
                 height: 8.h,
               ),
-              const CustomTextFormField(
+              CustomTextFormField(
                 prefixIcon: Icons.edit_note_rounded,
-                hintText: 'Event Title',
+                hintText: appLocalizations.event_title,
               ),
               SizedBox(
                 height: 16.h,
               ),
               Text(
-                'Description',
+                appLocalizations.description,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               SizedBox(
                 height: 8.h,
               ),
-              const CustomTextFormField(
+              CustomTextFormField(
                 maxLines: 5,
-                hintText: 'Event Description',
+                hintText: appLocalizations.event_description,
               ),
               SizedBox(
                 height: 16.h,
@@ -94,7 +97,7 @@ class _CreateEventState extends State<CreateEvent> {
                     width: 10.h,
                   ),
                   Text(
-                    'Event Date',
+                    appLocalizations.event_date,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const Spacer(),
@@ -106,7 +109,7 @@ class _CreateEventState extends State<CreateEvent> {
                         lastDate: DateTime.now().add(const Duration(days: 365)),
                       );
                     },
-                    text: 'Choose Date',
+                    text: appLocalizations.choose_date,
                   ),
                 ],
               ),
@@ -120,7 +123,7 @@ class _CreateEventState extends State<CreateEvent> {
                     width: 10.h,
                   ),
                   Text(
-                    'Event Time',
+                    appLocalizations.event_time,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const Spacer(),
@@ -131,7 +134,7 @@ class _CreateEventState extends State<CreateEvent> {
                         initialTime: TimeOfDay.now(),
                       );
                     },
-                    text: 'Choose Time',
+                    text: appLocalizations.choose_time,
                   ),
                 ],
               ),
@@ -140,7 +143,7 @@ class _CreateEventState extends State<CreateEvent> {
               ),
               CustomElevatedButton(
                 onPressed: () {},
-                title: 'Add Event',
+                title: appLocalizations.add_event,
               ),
             ],
           ),

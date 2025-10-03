@@ -1,6 +1,7 @@
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/features/main_layout/profile/drop_down_item.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,6 +10,7 @@ class ProfileTap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Column(
       children: [
         Container(
@@ -56,18 +58,18 @@ class ProfileTap extends StatelessWidget {
         SizedBox(
           height: 24.h,
         ),
-        const DropDownItem(
-          label: 'Language',
+        DropDownItem(
+          label: appLocalizations.language,
           selectedItem: 'Arabic',
           menuItems: ['Arabic', 'English'],
         ),
         SizedBox(
           height: 16.h,
         ),
-        const DropDownItem(
-          label: 'Theme',
-          selectedItem: 'Light',
-          menuItems: ['Light', 'Dark'],
+        DropDownItem(
+          label: appLocalizations.theme,
+          selectedItem: appLocalizations.light,
+          menuItems: [appLocalizations.light, appLocalizations.dark],
         ),
         Padding(
           padding: REdgeInsets.only(left: 16, right: 16, top: 260),
@@ -83,7 +85,7 @@ class ProfileTap extends StatelessWidget {
                 SizedBox(
                   width: 5.w,
                 ),
-                const Text('Logout'),
+                 Text(appLocalizations.logout),
               ],
             ),
           ),

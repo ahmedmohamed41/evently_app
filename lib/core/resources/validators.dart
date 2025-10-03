@@ -1,10 +1,14 @@
+
+import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+
 abstract class Validator {
-  static String? validateName(String? input) {
+  static String? validateName(String? input ,BuildContext context) {
     if (input == null || input.trim().isEmpty) {
-      return "Name is required";
+      return AppLocalizations.of(context)!.name_is_required;
     }
     if (input.length < 4) {
-      return "Name should be at leaste 4 chars ";
+      return AppLocalizations.of(context)!.name_should_be_at_leaste_4_chars;
     }
     return null;
   }
@@ -15,12 +19,12 @@ abstract class Validator {
     ).hasMatch(email);
   }
 
-  static String? validateEmail(String? input) {
+  static String? validateEmail(String? input ,BuildContext context) {
     if (input == null || input.trim().isEmpty) {
-      return "Email is required";
+      return AppLocalizations.of(context)!.email_is_required;
     }
     if (!validEmail(input)) {
-      return "Email Bad Format ";
+     return AppLocalizations.of(context)!.email_bad_format;
     }
     return null;
   }
@@ -31,12 +35,12 @@ abstract class Validator {
     ).hasMatch(password);
   }
 
-  static String? validatePassword(String? input) {
+  static String? validatePassword(String? input,BuildContext context) {
     if (input == null || input.trim().isEmpty) {
-      return "Password is required";
+      return AppLocalizations.of(context)!.password_is_required;
     }
     if (!validPassword(input)) {
-      return "weak password";
+     return AppLocalizations.of(context)!.weak_password;
     }
     return null;
   }

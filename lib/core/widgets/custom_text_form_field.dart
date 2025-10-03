@@ -25,16 +25,18 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       maxLines: maxLines,
       controller: controller,
-      validator: validator,
+      validator:validator,
       obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: Theme.of(context).textTheme.bodySmall,
         labelText: labelText,
-       
+
         prefixIcon: prefixIcon == null
             ? null
-            : Icon(prefixIcon,),
+            : Icon(
+                prefixIcon,
+              ),
         suffixIcon: suffixIcon,
       ),
     );

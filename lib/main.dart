@@ -1,6 +1,7 @@
 import 'package:evently_app/config/theme/theme_manager.dart';
 import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/routes/routes_manager.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,6 +20,9 @@ class EventlyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
+        locale: const Locale("ar"),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeManager.light,
         darkTheme: ThemeManager.dark,
         themeMode: ThemeMode.dark,

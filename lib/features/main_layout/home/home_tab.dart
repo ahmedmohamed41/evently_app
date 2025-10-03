@@ -1,6 +1,7 @@
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/widgets/custom_tab_bar.dart';
 import 'package:evently_app/features/main_layout/home/event_item.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/category_model.dart';
 import 'package:evently_app/models/event_model.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class _HomeTabState extends State<HomeTab> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Welcome Back ✨',
+                            AppLocalizations.of(context)!.welcome_back,
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
@@ -65,6 +66,9 @@ class _HomeTabState extends State<HomeTab> {
                         Icons.light_mode_outlined,
                         color: ColorsManager.white,
                       ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
                       Container(
                         margin: const EdgeInsets.only(left: 10),
                         padding: const EdgeInsets.all(10),
@@ -74,8 +78,7 @@ class _HomeTabState extends State<HomeTab> {
                         ),
                         child: Text(
                           'EN',
-                          style: Theme.of(context).textTheme.headlineMedium
-                              
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ),
                     ],
@@ -84,7 +87,7 @@ class _HomeTabState extends State<HomeTab> {
                     height: 16.h,
                   ),
                   CustomTabBar(
-                    categories: CategoryModel.categoriesWithAll,
+                    categories: CategoryModel.categoriesWithAll(context),
                     selectedTapBgColor: isDark == Brightness.light
                         ? ColorsManager.whiteBlue
                         : ColorsManager.blue,
@@ -109,7 +112,7 @@ class _HomeTabState extends State<HomeTab> {
             ),
             itemBuilder: (context, index) => EventItem(
               event: EventModel(
-                category: CategoryModel.categories[3],
+                category: CategoryModel.categories(context)[3],
                 dateTime: DateTime.now(),
                 timeOfDay: TimeOfDay.now(),
                 title: 'Meeting for Updating The Development Method ',
