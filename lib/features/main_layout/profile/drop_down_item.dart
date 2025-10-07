@@ -3,10 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DropDownItem extends StatelessWidget {
-  const DropDownItem({super.key, required this.label, required this.selectedItem, required this.menuItems});
+  const DropDownItem({
+    super.key,
+    required this.label,
+    required this.selectedItem,
+    required this.menuItems,
+    required this.onChange,
+  });
   final String label;
   final String selectedItem;
   final List<String> menuItems;
+  final void Function(String?)? onChange;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +22,7 @@ class DropDownItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-           label,
+            label,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           SizedBox(
@@ -48,7 +55,7 @@ class DropDownItem extends StatelessWidget {
                       ),
                     );
                   }).toList(),
-                  onChanged: (_) {},
+                  onChanged: onChange,
                 ),
               ],
             ),

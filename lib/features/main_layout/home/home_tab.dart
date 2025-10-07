@@ -4,20 +4,18 @@ import 'package:evently_app/features/main_layout/home/event_item.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/category_model.dart';
 import 'package:evently_app/models/event_model.dart';
+import 'package:evently_app/providers/config_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
-class HomeTab extends StatefulWidget {
+class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
 
   @override
-  State<HomeTab> createState() => _HomeTabState();
-}
-
-class _HomeTabState extends State<HomeTab> {
-  @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness;
+    ConfigProvider configProvider = Provider.of<ConfigProvider>(context);
     return Column(
       children: [
         Container(
@@ -33,52 +31,76 @@ class _HomeTabState extends State<HomeTab> {
                 children: [
                   Row(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.welcome_back,
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
-                          Text(
-                            'Ahmed Moo',
-                            style: Theme.of(context).textTheme.headlineLarge,
-                          ),
-                          SizedBox(height: 8.h),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.location_on_outlined,
-                                color: ColorsManager.white,
-                              ),
-                              Text(
-                                'Cairo , Egypt',
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.headlineSmall,
-                              ),
-                            ],
-                          ),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.welcome_back,
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
+                            Text(
+                              'Ahmed Moo',
+                              style: Theme.of(context).textTheme.headlineLarge,
+                            ),
+                            SizedBox(height: 8.h),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on_outlined,
+                                  color: ColorsManager.white,
+                                ),
+                                Text(
+                                  'Cairo , Egypt',
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.headlineSmall,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      const Spacer(),
-                      const Icon(
-                        Icons.light_mode_outlined,
-                        color: ColorsManager.white,
+                     
+                      IconButton(
+                        onPressed: () {
+                          if (!configProvider.isDark) {
+                            configProvider.changeAppTheme(ThemeMode.dark);
+                          } else {
+                            configProvider.changeAppTheme(ThemeMode.light);
+                          }
+                        },
+                        icon: Icon(
+                          !configProvider.isDark
+                              ? Icons.light_mode_outlined
+                              : Icons.dark_mode_outlined,
+                          color: ColorsManager.white,
+                        ),
                       ),
                       SizedBox(
-                        width: 10.w,
+                        width: 15.w,
                       ),
                       Container(
-                        margin: const EdgeInsets.only(left: 10),
+                        margin: const EdgeInsets.symmetric(horizontal: 15),
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: ColorsManager.ofWhite,
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Text(
-                          'EN',
-                          style: Theme.of(context).textTheme.headlineMedium,
+                        child: InkWell(
+                          onTap: () {
+                            if (configProvider.currentlanguage == 'en') {
+                              configProvider.changeAppLanguage('ar');
+                            } else {
+                              configProvider.changeAppLanguage('en');
+                            }
+                          },
+                          child: Text(
+                            configProvider.currentlanguage == 'en'
+                                ? 'EN'
+                                : 'AR',
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
                         ),
                       ),
                     ],

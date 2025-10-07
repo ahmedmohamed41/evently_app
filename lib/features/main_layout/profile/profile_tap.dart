@@ -2,14 +2,17 @@ import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/features/main_layout/profile/drop_down_item.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/providers/config_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTap extends StatelessWidget {
   const ProfileTap({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ConfigProvider configProvider = Provider.of<ConfigProvider>(context);
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Column(
       children: [
@@ -59,17 +62,35 @@ class ProfileTap extends StatelessWidget {
           height: 24.h,
         ),
         DropDownItem(
-          label: appLocalizations.language,
-          selectedItem: 'Arabic',
-          menuItems: ['Arabic', 'English'],
+          onChange: (newTheme) {
+            print(newTheme);
+            configProvider.changeAppTheme(
+              newTheme == appLocalizations.light
+                  ? ThemeMode.light
+                  : ThemeMode.dark,
+            );
+          },
+          label: appLocalizations.theme,
+          selectedItem: !configProvider.isDark
+              ? appLocalizations.light
+              : appLocalizations.dark,
+          menuItems: [appLocalizations.light, appLocalizations.dark],
         ),
         SizedBox(
           height: 16.h,
         ),
+
         DropDownItem(
-          label: appLocalizations.theme,
-          selectedItem: appLocalizations.light,
-          menuItems: [appLocalizations.light, appLocalizations.dark],
+          onChange: (newLanguage) {
+            configProvider.changeAppLanguage(
+              newLanguage == 'English' ? 'en' : 'ar',
+            );
+          },
+          label: appLocalizations.language,
+          selectedItem: configProvider.currentlanguage == 'en'
+              ? 'English'
+              : 'Arabic',
+          menuItems: ['English', 'Arabic'],
         ),
         Padding(
           padding: REdgeInsets.only(left: 16, right: 16, top: 260),
@@ -85,7 +106,7 @@ class ProfileTap extends StatelessWidget {
                 SizedBox(
                   width: 5.w,
                 ),
-                 Text(appLocalizations.logout),
+                Text(appLocalizations.logout),
               ],
             ),
           ),
