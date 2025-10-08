@@ -61,7 +61,7 @@ class HomeTab extends StatelessWidget {
                           ],
                         ),
                       ),
-                     
+
                       IconButton(
                         onPressed: () {
                           if (!configProvider.isDark) {
@@ -72,8 +72,8 @@ class HomeTab extends StatelessWidget {
                         },
                         icon: Icon(
                           !configProvider.isDark
-                              ? Icons.light_mode_outlined
-                              : Icons.dark_mode_outlined,
+                              ? Icons.dark_mode_outlined
+                              : Icons.light_mode_outlined,
                           color: ColorsManager.white,
                         ),
                       ),
@@ -97,8 +97,8 @@ class HomeTab extends StatelessWidget {
                           },
                           child: Text(
                             configProvider.currentlanguage == 'en'
-                                ? 'EN'
-                                : 'AR',
+                                ? 'AR'
+                                : 'EN',
                             style: Theme.of(context).textTheme.headlineMedium,
                           ),
                         ),

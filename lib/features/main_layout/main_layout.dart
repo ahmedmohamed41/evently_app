@@ -27,15 +27,17 @@ class _MainLayoutState extends State<MainLayout> {
       body: tabs[selectedIndex],
       bottomNavigationBar: _bottomNavigationBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(
-            context,
-            AppRoutes.createEvent,
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: MediaQuery.of(context).viewInsets.bottom != 0
+          ? null
+          : FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.createEvent,
+                );
+              },
+              child: const Icon(Icons.add),
+            ),
     );
   }
 
@@ -46,7 +48,7 @@ class _MainLayoutState extends State<MainLayout> {
   }
 
   BottomNavigationBar _bottomNavigationBar() {
-  AppLocalizations  appLocalizations = AppLocalizations.of(context)!;
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return BottomNavigationBar(
       onTap: _selectedItem,
       items: [
