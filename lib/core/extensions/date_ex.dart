@@ -8,4 +8,11 @@ extension DateTimeExtensions on DateTime {
   String get formattedNumDay {
     return DateFormat('dd').format(this);
   }
+
+  String get formatttedDate {
+    return DateFormat('dd-MM-yyyy').format(this);
+  }
+  String get formatttedTime {
+    return DateFormat('hh:mm a').format(this);
+  }
 }

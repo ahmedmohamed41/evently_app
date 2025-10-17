@@ -4,12 +4,15 @@ import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/routes/routes_manager.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/config_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await PrefsManager.init();
   runApp(
     ChangeNotifierProvider(
@@ -38,7 +41,9 @@ class EventlyApp extends StatelessWidget {
         darkTheme: ThemeManager.dark,
         themeMode: configProvider.currentTheme,
         onGenerateRoute: RoutesManager.router,
-        initialRoute: AppRoutes.mainLayout,
+        initialRoute: FirebaseAuth.instance.currentUser == null
+            ? AppRoutes.login
+            : AppRoutes.mainLayout,
       ),
     );
   }

@@ -2,7 +2,7 @@
 "register": "Register",
 "name": "Name",
 "email": "E-mail",
-"password": "Re-Password",
+"password": "Password",
 "welcome_back": "Welcome Back",
 "create_account": "Create Account",
 "already_have_account": "Already Have Account?",

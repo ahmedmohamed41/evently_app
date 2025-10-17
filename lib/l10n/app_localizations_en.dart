@@ -18,7 +18,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get email => 'E-mail';
 
   @override
-  String get password => 'Re-Password';
+  String get password => 'Password';
 
   @override
   String get welcome_back => 'Welcome Back';

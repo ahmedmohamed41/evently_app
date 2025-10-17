@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
+import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/features/main_layout/profile/drop_down_item.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/config_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +67,7 @@ class ProfileTap extends StatelessWidget {
         ),
         DropDownItem(
           onChange: (newTheme) {
-            print(newTheme);
+            log(newTheme.toString());
             configProvider.changeAppTheme(
               newTheme == appLocalizations.light
                   ? ThemeMode.light
@@ -99,7 +103,7 @@ class ProfileTap extends StatelessWidget {
               padding: REdgeInsets.all(16),
               backgroundColor: ColorsManager.redWhite,
             ),
-            onPressed: () {},
+            onPressed: () => _logout(context),
             child: Row(
               children: [
                 const Icon(Icons.logout),
@@ -113,5 +117,10 @@ class ProfileTap extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _logout(BuildContext context) {
+    FirebaseAuth.instance.signOut();
+    Navigator.pushReplacementNamed(context, AppRoutes.login);
   }
 }
