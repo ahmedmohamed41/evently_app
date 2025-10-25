@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/routes/app_routes.dart';
@@ -83,7 +82,6 @@ class ProfileTap extends StatelessWidget {
         SizedBox(
           height: 16.h,
         ),
-
         DropDownItem(
           onChange: (newLanguage) {
             configProvider.changeAppLanguage(
@@ -97,7 +95,7 @@ class ProfileTap extends StatelessWidget {
           menuItems: ['English', 'Arabic'],
         ),
         Padding(
-          padding: REdgeInsets.only(left: 16, right: 16, top: 260),
+          padding: REdgeInsets.only(left: 16, right: 16, top: 200),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               padding: REdgeInsets.all(16),

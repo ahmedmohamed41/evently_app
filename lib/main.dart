@@ -2,6 +2,7 @@ import 'package:evently_app/config/theme/theme_manager.dart';
 import 'package:evently_app/core/prefs/prefs_manager.dart';
 import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/routes/routes_manager.dart';
+import 'package:evently_app/firebase_service/service/fcm_service.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/config_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +15,7 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await PrefsManager.init();
+  await FcmService.initFCM();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ConfigProvider(),
