@@ -1,17 +1,27 @@
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/widgets/custom_tab_bar.dart';
 import 'package:evently_app/features/main_layout/home/event_item.dart';
+import 'package:evently_app/firebase_service/firebase_service.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/category_model.dart';
 import 'package:evently_app/models/event_model.dart';
+import 'package:evently_app/models/user_model.dart';
 import 'package:evently_app/providers/config_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
 
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  late CategoryModel selectedCategory = CategoryModel.categoriesWithAll(
+    context,
+  )[0];
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness;
@@ -40,7 +50,7 @@ class HomeTab extends StatelessWidget {
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                             Text(
-                              'Ahmed Moo',
+                              UserModel.currentUser!.name,
                               style: Theme.of(context).textTheme.headlineLarge,
                             ),
                             SizedBox(height: 8.h),
@@ -109,6 +119,10 @@ class HomeTab extends StatelessWidget {
                     height: 16.h,
                   ),
                   CustomTabBar(
+                    onCategoryItemClicked: (category) {
+                      selectedCategory = category;
+                      setState(() {});
+                    },
                     categories: CategoryModel.categoriesWithAll(context),
                     selectedTapBgColor: isDark == Brightness.light
                         ? ColorsManager.whiteBlue
@@ -126,23 +140,38 @@ class HomeTab extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: ListView.separated(
-            padding: REdgeInsets.only(top: 20),
-            separatorBuilder: (context, index) => SizedBox(
-              height: 16.h,
-            ),
-            itemBuilder: (context, index) => EventItem(
-              event: EventModel(
-                category: CategoryModel.categories(context)[3],
-                dateTime: DateTime.now(),
-                timeOfDay: TimeOfDay.now(),
-                title: 'Meeting for Updating The Development Method ',
-                description: 'Meeting for Updating The Development Method ',
-              ),
-            ),
-            itemCount: 10,
+
+        FutureBuilder(
+          future: FirebaseService.getEventFromFireStore(
+            context,
+            selectedCategory,
           ),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            }
+            List<EventModel> events = snapshot.data ?? [];
+            return Expanded(
+              child: ListView.separated(
+                padding: REdgeInsets.only(top: 20),
+                separatorBuilder: (context, index) => SizedBox(
+                  height: 16.h,
+                ),
+                itemBuilder: (context, index) =>
+                    EventItem(event: events[index]),
+                itemCount: events.length,
+              ),
+            );
+          },
         ),
       ],
     );

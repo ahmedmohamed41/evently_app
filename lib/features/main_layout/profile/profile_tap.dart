@@ -4,6 +4,7 @@ import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/features/main_layout/profile/drop_down_item.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/models/user_model.dart';
 import 'package:evently_app/providers/config_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class ProfileTap extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'Ahmed Moo',
+                          UserModel.currentUser!.name,
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
                         SizedBox(
@@ -47,7 +48,7 @@ class ProfileTap extends StatelessWidget {
                         ),
                         Text(
                           overflow: TextOverflow.clip,
-                          'AhmedMoo@gmail.com',
+                           UserModel.currentUser!.email,
                           style: Theme.of(context).textTheme.bodySmall!
                               .copyWith(
                                 color: ColorsManager.whiteBlue,

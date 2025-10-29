@@ -8,6 +8,7 @@ import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
 import 'package:evently_app/firebase_service/firebase_service.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -187,10 +188,14 @@ class _LoginState extends State<Login> {
     if (_formKey.currentState?.validate() == false) return;
     try {
       UiUtils.showLoading(context);
-      await FirebaseService.login(
+      UserCredential userCredential = await FirebaseService.login(
         _emailController.text,
         _passwordController.text,
       );
+      UserModel.currentUser = await FirebaseService.getUserFromFireStore(
+        userCredential.user!.uid,
+      );
+
       UiUtils.hideLoading(context);
       UiUtils.showFluttertoast('User Registered Successfully', Colors.green);
       Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);

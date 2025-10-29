@@ -33,10 +33,10 @@ class _CustomTabBarState extends State<CustomTabBar> {
 
       child: TabBar(
         indicatorColor: Colors.transparent,
-        onTap: (value) {
-          widget.onCategoryItemClicked?.call(widget.categories[value]);
+        onTap: (index) {
+          widget.onCategoryItemClicked?.call(widget.categories[index]);
           setState(() {
-            isSelected = value;
+            isSelected = index;
           });
         },
         isScrollable: true,

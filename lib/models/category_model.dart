@@ -15,7 +15,7 @@ class CategoryModel {
   });
 
   static List<CategoryModel> categoriesWithAll(BuildContext context) {
-    AppLocalizations appLocalizations=AppLocalizations.of(context)!;
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return [
       CategoryModel(
         id: "0",
@@ -80,11 +80,9 @@ class CategoryModel {
     ];
   }
 
-
   static List<CategoryModel> categories(BuildContext context) {
-    AppLocalizations appLocalizations=AppLocalizations.of(context)!;
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return [
-     
       CategoryModel(
         id: "1",
         name: appLocalizations.sports,
@@ -141,6 +139,4 @@ class CategoryModel {
       ),
     ];
   }
-
-
 }

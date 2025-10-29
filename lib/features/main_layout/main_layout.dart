@@ -30,6 +30,7 @@ class _MainLayoutState extends State<MainLayout> {
       floatingActionButton: MediaQuery.of(context).viewInsets.bottom != 0
           ? null
           : FloatingActionButton(
+              heroTag: null,
               onPressed: () {
                 Navigator.pushNamed(
                   context,

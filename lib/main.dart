@@ -2,8 +2,10 @@ import 'package:evently_app/config/theme/theme_manager.dart';
 import 'package:evently_app/core/prefs/prefs_manager.dart';
 import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/routes/routes_manager.dart';
+import 'package:evently_app/firebase_service/firebase_service.dart';
 import 'package:evently_app/firebase_service/service/fcm_service.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/models/user_model.dart';
 import 'package:evently_app/providers/config_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,11 @@ void main(List<String> args) async {
   await Firebase.initializeApp();
   await PrefsManager.init();
   await FcmService.initFCM();
+  if (FirebaseAuth.instance.currentUser != null) {
+    UserModel.currentUser = await FirebaseService.getUserFromFireStore(
+      FirebaseAuth.instance.currentUser!.uid,
+    );
+  }
   runApp(
     ChangeNotifierProvider(
       create: (context) => ConfigProvider(),

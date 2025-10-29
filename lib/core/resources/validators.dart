@@ -1,9 +1,8 @@
-
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 abstract class Validator {
-  static String? validateName(String? input ,BuildContext context) {
+  static String? validateName(String? input, BuildContext context) {
     if (input == null || input.trim().isEmpty) {
       return AppLocalizations.of(context)!.name_is_required;
     }
@@ -19,12 +18,12 @@ abstract class Validator {
     ).hasMatch(email);
   }
 
-  static String? validateEmail(String? input ,BuildContext context) {
+  static String? validateEmail(String? input, BuildContext context) {
     if (input == null || input.trim().isEmpty) {
       return AppLocalizations.of(context)!.email_is_required;
     }
     if (!validEmail(input)) {
-     return AppLocalizations.of(context)!.email_bad_format;
+      return AppLocalizations.of(context)!.email_bad_format;
     }
     return null;
   }
@@ -35,12 +34,29 @@ abstract class Validator {
     ).hasMatch(password);
   }
 
-  static String? validatePassword(String? input,BuildContext context) {
+  static String? validatePassword(String? input, BuildContext context) {
     if (input == null || input.trim().isEmpty) {
       return AppLocalizations.of(context)!.password_is_required;
     }
     if (!validPassword(input)) {
-     return AppLocalizations.of(context)!.weak_password;
+      return AppLocalizations.of(context)!.weak_password;
+    }
+    return null;
+  }
+
+  static String? validateTitle(String? title, BuildContext context) {
+    if (title == null || title.trim().isEmpty) {
+      return AppLocalizations.of(context)!.title;
+    }
+    return null;
+  }
+
+  static String? validateDescription(
+    String? description,
+    BuildContext context,
+  ) {
+    if (description == null || description.trim().isEmpty) {
+      return AppLocalizations.of(context)!.description;
     }
     return null;
   }
