@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -154,7 +155,17 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadiusGeometry.circular(16.r),
                       side: const BorderSide(color: ColorsManager.blue),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await signInWithGoogle();
+                      UiUtils.showFluttertoast(
+                        'User Login Successfully',
+                        Colors.green,
+                      );
+                      Navigator.pushReplacementNamed(
+                        context,
+                        AppRoutes.mainLayout,
+                      );
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -178,6 +189,44 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn.instance;
+      await googleSignIn.initialize(
+        serverClientId:
+            "810878485681-r2g22pvpooc8crs6ceek06eidskgdi4d.apps.googleusercontent.com",
+      );
+      final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
+      if (googleUser == null) return;
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential firebaseUser = await FirebaseAuth.instance
+          .signInWithCredential(credential);
+
+      UserModel finalUser = UserModel(
+        name: firebaseUser.user?.displayName ?? 'No name provider',
+        email: firebaseUser.user?.email ?? 'No email provider',
+        id: firebaseUser.user?.uid ?? '',
+        favouritesIds: [],
+      );
+      final existingUser = await FirebaseService.getUserFromFireStore(
+        firebaseUser.user!.uid,
+      );
+      if (existingUser != null) {
+        UserModel.currentUser = existingUser;
+      } else {
+        await FirebaseService.addUserToFireStore(finalUser);
+        UserModel.currentUser = finalUser;
+      }
+    } catch (exception) {
+      log(exception.toString());
+    }
   }
 
   void _onClickedPasswordSecure() {
