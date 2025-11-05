@@ -173,4 +173,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get password_doesnt_match => 'كلمة المرور لا تتطابق';
+
+  @override
+  String get no_favourite_events_yet => 'لا يوجد أحداث مفضلة حتى الآن';
+
+  @override
+  String get edit_event => 'تعديل الحدث';
 }

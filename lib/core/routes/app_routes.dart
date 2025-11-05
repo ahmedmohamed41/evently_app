@@ -6,4 +6,7 @@ class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String mainLayout = '/mainLayout';
   static const String createEvent = '/createEvent';
+  static const String eventDetails = '/eventDetails';
+  static const String editEvent = '/editEvent';
+  static const String pickLocationScreen = '/pickLocationScreen';
 }

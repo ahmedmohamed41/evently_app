@@ -53,5 +53,7 @@
   "name_should_be_at_leaste_4_chars": "يجب أن يكون الاسم على الأقل 4 أحرف",
   "email_bad_format": "صيغة البريد الإلكتروني غير صحيحة",
   "weak_password": "كلمة المرور ضعيفة",
-  "password_doesnt_match": "كلمة المرور لا تتطابق"
+  "password_doesnt_match": "كلمة المرور لا تتطابق",
+  "no_favourite_events_yet": "لا يوجد أحداث مفضلة حتى الآن",
+  "edit_event": "تعديل الحدث"
 }

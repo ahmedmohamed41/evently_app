@@ -180,6 +180,7 @@ class _RegisterState extends State<Register> {
           id: userCredential.user!.uid,
           name: _nameController.text,
           email: _emailController.text,
+          favouritesIds: [],
         ),
       );
       UiUtils.hideLoading(context);

@@ -427,6 +427,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password doesn\'t match'**
   String get password_doesnt_match;
+
+  /// No description provided for @no_favourite_events_yet.
+  ///
+  /// In en, this message translates to:
+  /// **'No favourite events yet!'**
+  String get no_favourite_events_yet;
+
+  /// No description provided for @edit_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Event'**
+  String get edit_event;
 }
 
 class _AppLocalizationsDelegate

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:evently_app/core/UI_Utils/ui_utils.dart';
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
@@ -197,12 +199,13 @@ class _LoginState extends State<Login> {
       );
 
       UiUtils.hideLoading(context);
-      UiUtils.showFluttertoast('User Registered Successfully', Colors.green);
+      UiUtils.showFluttertoast('User Login Successfully', Colors.green);
       Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
     } on FirebaseAuthException catch (e) {
       UiUtils.hideLoading(context);
       UiUtils.showFluttertoast('Wrong Email or password', Colors.red);
     } catch (e) {
+      log(e.toString());
       UiUtils.hideLoading(context);
       UiUtils.showFluttertoast('something Error', Colors.red);
     }

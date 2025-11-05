@@ -173,4 +173,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get password_doesnt_match => 'Password doesn\'t match';
+
+  @override
+  String get no_favourite_events_yet => 'No favourite events yet!';
+
+  @override
+  String get edit_event => 'Edit Event';
 }

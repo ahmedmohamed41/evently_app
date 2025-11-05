@@ -9,40 +9,56 @@ import 'package:evently_app/core/widgets/custom_elevated_button.dart';
 import 'package:evently_app/core/widgets/custom_navigator_location.dart';
 import 'package:evently_app/core/widgets/custom_tab_bar.dart';
 import 'package:evently_app/core/widgets/custom_text_form_field.dart';
+import 'package:evently_app/features/pick_location/pick_location_screen.dart';
 import 'package:evently_app/features/pick_location/provider/pick_location_provider.dart';
 import 'package:evently_app/firebase_service/firebase_service.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/category_model.dart';
 import 'package:evently_app/models/event_model.dart';
-import 'package:evently_app/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-class CreateEvent extends StatefulWidget {
-  const CreateEvent({super.key});
+class EditEvent extends StatefulWidget {
+  const EditEvent({
+    super.key,
+    required this.event,
+  });
+  final EventModel event;
 
   @override
-  State<CreateEvent> createState() => _CreateEventState();
+  State<EditEvent> createState() => _EditEventState();
 }
 
-class _CreateEventState extends State<CreateEvent> {
-  late CategoryModel selectedCategory = selectedCategory =
-      CategoryModel.categories(context)[0];
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+class _EditEventState extends State<EditEvent> {
+  late CategoryModel selectedCategory = widget.event.category;
+  late TextEditingController _titleController;
+  late TextEditingController _descriptionController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String? locationUpadet;
 
-  DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
+  late DateTime selectedDate;
+  late TimeOfDay selectedTime;
+  @override
+  void initState() {
+    _titleController = TextEditingController(text: widget.event.title);
+    _descriptionController = TextEditingController(
+      text: widget.event.description,
+    );
+    selectedDate = widget.event.dateTime;
+    selectedTime = TimeOfDay.fromDateTime(widget.event.dateTime);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    log('location update');
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(appLocalizations.create_event),
+        title: Text(appLocalizations.edit_event),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -64,6 +80,7 @@ class _CreateEventState extends State<CreateEvent> {
                   height: 16.h,
                 ),
                 CustomTabBar(
+                  initialIndex: _convertSelectedId(selectedCategory.id),
                   onCategoryItemClicked: (category) {
                     setState(() {
                       selectedCategory = category;
@@ -160,15 +177,17 @@ class _CreateEventState extends State<CreateEvent> {
                   builder: (context, provider, _) {
                     return CustomNavigatorLocation(
                       onTap: () {
-                        Navigator.pushNamed(
+                        Navigator.push(
                           context,
-                          AppRoutes.pickLocationScreen,
+                          MaterialPageRoute(
+                            builder: (context) => const PickLocationScreen(),
+                          ),
                         );
                       },
                       icon: Icons.gps_fixed,
                       title: provider.eventLocation == null
-                          ? 'Choose Event Location'
-                          : '${provider.city},${provider.country}',
+                          ? '${widget.event.city}, ${widget.event.country}'
+                          : '${provider.city}, ${provider.country}',
                       iconArrow: Icons.arrow_forward_ios_rounded,
                     );
                   },
@@ -180,12 +199,10 @@ class _CreateEventState extends State<CreateEvent> {
                   builder: (context, provider, _) {
                     return CustomElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState?.validate() == false) {
-                          return;
-                        }
-                        _createEvent(provider);
+                        if (_formKey.currentState?.validate() == false) return;
+                        _updateEvent(provider);
                       },
-                      title: appLocalizations.add_event,
+                      title: appLocalizations.update_event,
                     );
                   },
                 ),
@@ -197,10 +214,10 @@ class _CreateEventState extends State<CreateEvent> {
     );
   }
 
-  void _createEvent(PickLocationProvider provider) async {
+  void _updateEvent(PickLocationProvider provider) async {
     EventModel event = EventModel(
-      eventId: "",
-      userId: UserModel.currentUser!.id,
+      eventId: widget.event.eventId,
+      userId: widget.event.userId,
       category: selectedCategory,
       dateTime: selectedDate,
       title: _titleController.text,
@@ -211,10 +228,15 @@ class _CreateEventState extends State<CreateEvent> {
       country: provider.country,
     );
     UiUtils.showLoading(context);
-    await FirebaseService.addEventToFireStore(event, context);
+    await FirebaseService.updateEventToFireStore(event, context);
     UiUtils.hideLoading(context);
-    UiUtils.showFluttertoast('Event Create Successfully', Colors.green);
-    Navigator.pop(context);
+    UiUtils.showFluttertoast('Update Event Successfully', Colors.green);
+    Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);
+  }
+
+  int _convertSelectedId(String id) {
+    int x = int.tryParse(id) ?? 0;
+    return --x;
   }
 
   void _selectedEventDate() async {

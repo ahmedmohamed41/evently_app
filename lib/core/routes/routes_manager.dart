@@ -5,12 +5,12 @@ import 'package:evently_app/features/create_event/create_event.dart';
 import 'package:evently_app/features/main_layout/main_layout.dart';
 import 'package:evently_app/features/on_boarding/onboarding_screen.dart';
 import 'package:evently_app/features/on_boarding/onboarding_screen_start.dart';
+import 'package:evently_app/features/pick_location/pick_location_screen.dart';
+import 'package:evently_app/features/pick_location/provider/pick_location_provider.dart';
 import 'package:evently_app/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 abstract class RoutesManager {
-
-
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.login:
@@ -27,7 +27,9 @@ abstract class RoutesManager {
         }
       case AppRoutes.onboarding:
         {
-          return MaterialPageRoute(builder: (context) => const OnBoardingScreen());
+          return MaterialPageRoute(
+            builder: (context) => const OnBoardingScreen(),
+          );
         }
       case AppRoutes.onboardingStart:
         {
@@ -41,8 +43,27 @@ abstract class RoutesManager {
         }
       case AppRoutes.createEvent:
         {
-          return MaterialPageRoute(builder: (context) => const CreateEvent());
+          return MaterialPageRoute(
+            builder: (_) => const CreateEvent(),
+          );
         }
+      case AppRoutes.pickLocationScreen:
+        {
+          return MaterialPageRoute(
+            builder: (context) {
+              return const PickLocationScreen();
+            },
+          );
+        }
+      // case AppRoutes.eventDetails:
+      //   {
+      //     return MaterialPageRoute(builder: (context) => const EventDetails());
+      //   }
+      // case AppRoutes.editEvent:
+      //   {
+      //     return MaterialPageRoute(builder: (context) => const EditEvent());
+      //   }
     }
+    return null;
   }
 }

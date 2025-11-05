@@ -4,7 +4,9 @@ import 'package:evently_app/features/main_layout/home/home_tab.dart';
 import 'package:evently_app/features/main_layout/map/map_tab.dart';
 import 'package:evently_app/features/main_layout/profile/profile_tap.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/providers/map_tab_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -16,7 +18,9 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   List<Widget> tabs = [
     const HomeTab(),
-    const MapTab(),
+    ChangeNotifierProvider(
+      create: (context) => MapTabProvider(),
+      child: const MapTab()),
     const FavouriteTab(),
     const ProfileTap(),
   ];

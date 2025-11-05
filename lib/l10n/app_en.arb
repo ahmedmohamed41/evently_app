@@ -53,5 +53,7 @@
 "name_should_be_at_leaste_4_chars":"Name should be at leaste 4 chars",
 "email_bad_format":"Email Bad Format",
 "weak_password":"Weak Password",
-"password_doesnt_match": "Password doesn't match"
+"password_doesnt_match": "Password doesn't match",
+"no_favourite_events_yet": "No favourite events yet!",
+"edit_event": "Edit Event"
 }

@@ -72,16 +72,46 @@ class FirebaseService {
     return eventDocument.set(event);
   }
 
-  static Future<List<EventModel>> getEventFromFireStore(
+  static Future<void> updateEventToFireStore(
+    EventModel event,
     BuildContext context,
-    CategoryModel category,
-  ) async {
+  ) {
+    CollectionReference<EventModel> eventsCollection = _getEventCollection(
+      context,
+    );
+    DocumentReference<EventModel> eventDocument = eventsCollection.doc(
+      event.eventId,
+    );
+
+    return eventDocument.update(event.toJson());
+  }
+  static Future<void> deleteEventToFireStore(
+    EventModel event,
+    BuildContext context,
+  ) {
+    CollectionReference<EventModel> eventsCollection = _getEventCollection(
+      context,
+    );
+    DocumentReference<EventModel> eventDocument = eventsCollection.doc(
+      event.eventId,
+    );
+
+    return eventDocument.delete();
+  }
+
+  static Future<List<EventModel>> getEventFromFireStore(
+    BuildContext context, [
+    CategoryModel? category,
+  ]) async {
     CollectionReference<EventModel> eventsCollection = _getEventCollection(
       context,
     );
 
     QuerySnapshot<EventModel> querySnapshot = await eventsCollection
-        .where('categoryId', isEqualTo: category.id == "0" ? null : category.id)
+        .where(
+          'categoryId',
+          isEqualTo: category?.id == "0" ? null : category?.id,
+        )
         .orderBy(
           'dateTime',
         )
@@ -93,4 +123,111 @@ class FirebaseService {
         .toList();
     return events;
   }
+
+  static Stream<List<EventModel>> getEventFromFireStoreRealTimeUpdates(
+    BuildContext context,
+    CategoryModel category,
+  ) async* {
+    CollectionReference<EventModel> eventsCollection = _getEventCollection(
+      context,
+    );
+
+    Stream<QuerySnapshot<EventModel>> collectionSnapshot = eventsCollection
+        .where('categoryId', isEqualTo: category.id == "0" ? null : category.id)
+        .orderBy(
+          'dateTime',
+        )
+        .snapshots();
+    Stream<List<EventModel>> events = collectionSnapshot.map(
+      (querySnapshot) => querySnapshot.docs
+          .map(
+            (documentSnapshot) => documentSnapshot.data(),
+          )
+          .toList(),
+    );
+    yield* events;
+  }
+
+  static Future<void> addEventToFavourite(EventModel event) {
+    UserModel currentUser = UserModel.currentUser!;
+
+    currentUser.favouritesIds.add(event.eventId);
+    CollectionReference<UserModel> collectionReference = _getUserCollection();
+    DocumentReference<UserModel> documentReference = collectionReference.doc(
+      currentUser.id,
+    );
+    return documentReference.set(currentUser);
+  }
+
+  static Future<void> removeEventToFavourite(EventModel event) {
+    UserModel currentUser = UserModel.currentUser!;
+
+    currentUser.favouritesIds.remove(event.eventId);
+    CollectionReference<UserModel> collectionReference = _getUserCollection();
+    DocumentReference<UserModel> documentReference = collectionReference.doc(
+      currentUser.id,
+    );
+    return documentReference.set(currentUser);
+  }
+
+  static Future<List<EventModel>> getFavouriteEvent(
+    BuildContext context,
+  ) async {
+    List<EventModel> events = await getEventFromFireStore(context);
+    List<EventModel> favEvents = events
+        .where(
+          (event) =>
+              UserModel.currentUser!.favouritesIds.contains(event.eventId),
+        )
+        .toList();
+    return favEvents;
+  }
+
+  // static Stream<List<EventModel>> getFavouriteEventRealTimeUpdate(
+  //   BuildContext context,
+  //   [CategoryModel? category,]
+  // ) async* {
+  //   CollectionReference<EventModel> eventsCollection = _getEventCollection(
+  //     context,
+  //   );
+  //   Stream<QuerySnapshot<EventModel>> collectionSnapshot = eventsCollection
+  //       .where('categoryId', isEqualTo: category?.id == "0" ? null : category?.id)
+  //       .orderBy(
+  //         'dateTime',
+  //       )
+  //       .snapshots();
+  //   Stream<List<EventModel>> events = collectionSnapshot.map(
+  //     (querySnapshot) => querySnapshot.docs
+  //         .map(
+  //           (documentSnapshot) => documentSnapshot.data(),
+  //         )
+  //         .toList(),
+  //   );
+  //   events.where(
+  //     (event) =>
+  //         UserModel.currentUser!.favouritesIds.contains(event.first.eventId),
+  //   );
+  //   yield* events;
+  // }
+  // static Stream<List<EventModel>> getFavouriteEventRealTimeUpdate(
+  //   BuildContext context, [
+  //   CategoryModel? category,
+  // ]) async* {
+  //   CollectionReference<EventModel> eventsCollection = _getEventCollection(
+  //     context,
+  //   );
+  //   // 🔹 نجيب كل الأحداث اللي بتحصل عليها تحديثات مباشرة
+  //   Stream<QuerySnapshot<EventModel>> collectionSnapshot = eventsCollection
+  //       .orderBy('dateTime')
+  //       .snapshots();
+  //   // 🔹 نحولها لقائمة من الأحداث ونفلتر حسب المفضلات
+  //   yield* collectionSnapshot.map((querySnapshot) {
+  //     final allEvents = querySnapshot.docs.map((doc) => doc.data()).toList();
+  //     // 🔹 نفلتر المفضلات فقط
+  //     final favEvents = allEvents.where((event) {
+  //       return UserModel.currentUser!.favouritesIds.contains(event.eventId);
+  //     }).toList();
+  //     return favEvents;
+  //   });
+  // }
 }

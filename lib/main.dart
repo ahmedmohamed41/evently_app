@@ -2,6 +2,7 @@ import 'package:evently_app/config/theme/theme_manager.dart';
 import 'package:evently_app/core/prefs/prefs_manager.dart';
 import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/routes/routes_manager.dart';
+import 'package:evently_app/features/pick_location/provider/pick_location_provider.dart';
 import 'package:evently_app/firebase_service/firebase_service.dart';
 import 'package:evently_app/firebase_service/service/fcm_service.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
@@ -24,8 +25,11 @@ void main(List<String> args) async {
     );
   }
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ConfigProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ConfigProvider()),
+        ChangeNotifierProvider(create: (context) => PickLocationProvider()),
+      ],
       child: const EventlyApp(),
     ),
   );

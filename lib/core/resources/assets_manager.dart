@@ -21,4 +21,5 @@ class ImagesAssets {
   //////////////////////////////////////////////////////////////
   static const String googleIconSvg = '$base/google_icon.svg';
   static const String logoSplashSvg = '$base/LogoSplash.svg';
+  static const String location = '$base/location.png';
 }

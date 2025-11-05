@@ -141,8 +141,8 @@ class _HomeTabState extends State<HomeTab> {
           ),
         ),
 
-        FutureBuilder(
-          future: FirebaseService.getEventFromFireStore(
+        StreamBuilder(
+          stream: FirebaseService.getEventFromFireStoreRealTimeUpdates(
             context,
             selectedCategory,
           ),
@@ -166,8 +166,11 @@ class _HomeTabState extends State<HomeTab> {
                 separatorBuilder: (context, index) => SizedBox(
                   height: 16.h,
                 ),
-                itemBuilder: (context, index) =>
-                    EventItem(event: events[index]),
+                itemBuilder: (context, index) => EventItem(
+                  event: events[index],
+                  markAsFavourite: UserModel.currentUser!.favouritesIds
+                      .contains(events[index].eventId),
+                ),
                 itemCount: events.length,
               ),
             );
