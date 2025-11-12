@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:evently_app/core/UI_Utils/ui_utils.dart';
 import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
@@ -11,12 +12,14 @@ import 'package:evently_app/core/widgets/custom_text_form_field.dart';
 import 'package:evently_app/firebase_service/firebase_service.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/user_model.dart';
+import 'package:evently_app/providers/config_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -49,6 +52,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    final configProvider = Provider.of<ConfigProvider>(context);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -63,7 +67,7 @@ class _LoginState extends State<Login> {
             child: Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Image.asset(
                     ImagesAssets.eventlyLogo,
@@ -98,9 +102,13 @@ class _LoginState extends State<Login> {
                   SizedBox(height: 16.h),
                   CustomButtomText(text: appLocalizations.forget_password),
                   SizedBox(height: 16.h),
-                  CustomElevatedButton(
-                    onPressed: _loginAccount,
-                    title: appLocalizations.login,
+                  SizedBox(
+                    width: 361.w,
+                    height: 60.h,
+                    child: CustomElevatedButton(
+                      onPressed: _loginAccount,
+                      title: appLocalizations.login,
+                    ),
                   ),
                   SizedBox(height: 24.h),
                   Row(
@@ -182,6 +190,36 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                   ),
+                  SizedBox(height: 24.h),
+                  Center(
+                    child: AnimatedToggleSwitch<String>.dual(
+                      current: configProvider.currentlanguage,
+                      first: 'en',
+                      second: 'ar',
+                      height: 45.h,
+                      spacing: 2.w,
+                      borderWidth: 2,
+                      style: const ToggleStyle(
+                        backgroundColor: Colors.transparent,
+                        borderColor: ColorsManager.blue,
+                        indicatorColor: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      animationDuration: const Duration(milliseconds: 300),
+                      onChanged: (value) =>
+                          configProvider.changeAppLanguage(value),
+                      iconBuilder: (value) {
+                        return SvgPicture.asset(
+                          value == 'en'
+                              ? ImagesAssets.enLogo
+                              : ImagesAssets.egLogo,
+                          height: 35.h,
+                          width: 35.h,
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 30.h),
                 ],
               ),
             ),

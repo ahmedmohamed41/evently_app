@@ -20,7 +20,8 @@ class _MainLayoutState extends State<MainLayout> {
     const HomeTab(),
     ChangeNotifierProvider(
       create: (context) => MapTabProvider(),
-      child: const MapTab()),
+      child: const MapTab(),
+    ),
     const FavouriteTab(),
     const ProfileTap(),
   ];

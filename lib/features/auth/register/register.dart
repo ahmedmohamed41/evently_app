@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:evently_app/core/UI_Utils/ui_utils.dart';
 import 'package:evently_app/core/resources/assets_manager.dart';
+import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/resources/validators.dart';
 import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/widgets/custom_buttom_text.dart';
@@ -10,9 +12,12 @@ import 'package:evently_app/core/widgets/custom_text_form_field.dart';
 import 'package:evently_app/firebase_service/firebase_service.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/user_model.dart';
+import 'package:evently_app/providers/config_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -51,6 +56,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    final configProvider = Provider.of<ConfigProvider>(context);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -65,7 +71,7 @@ class _RegisterState extends State<Register> {
             child: Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Image.asset(
                     ImagesAssets.eventlyLogo,
@@ -134,9 +140,13 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   SizedBox(height: 16.h),
-                  CustomElevatedButton(
-                    onPressed: _createAccount,
-                    title: appLocalizations.create_account,
+                  SizedBox(
+                    width: 361.w,
+                    height: 60.h,
+                    child: CustomElevatedButton(
+                      onPressed: _createAccount,
+                      title: appLocalizations.create_account,
+                    ),
                   ),
                   SizedBox(height: 16.h),
                   Row(
@@ -157,6 +167,34 @@ class _RegisterState extends State<Register> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 16.h),
+                  AnimatedToggleSwitch<String>.dual(
+                    current: configProvider.currentlanguage,
+                    first: 'en',
+                    second: 'ar',
+                    height: 45.h,
+                    spacing: 2.w,
+                    borderWidth: 2,
+                    style: const ToggleStyle(
+                      backgroundColor: Colors.transparent,
+                      borderColor: ColorsManager.blue,
+                      indicatorColor: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                    ),
+                    animationDuration: const Duration(milliseconds: 300),
+                    onChanged: (value) =>
+                        configProvider.changeAppLanguage(value),
+                    iconBuilder: (value) {
+                      return SvgPicture.asset(
+                        value == 'en'
+                            ? ImagesAssets.enLogo
+                            : ImagesAssets.egLogo,
+                        height: 35.h,
+                        width: 35.h,
+                      );
+                    },
+                  ),
+                  SizedBox(height: 30.h),
                 ],
               ),
             ),
