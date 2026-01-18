@@ -140,7 +140,6 @@ class _HomeTabState extends State<HomeTab> {
             ),
           ),
         ),
-
         StreamBuilder(
           stream: FirebaseService.getEventFromFireStoreRealTimeUpdates(
             context,
@@ -159,10 +158,18 @@ class _HomeTabState extends State<HomeTab> {
                 child: Text(snapshot.error.toString()),
               );
             }
+            if (snapshot.data == []) {
+              return const Expanded(
+                child: Center(
+                  child: Text('No Events Yet!'),
+                ),
+              );
+            }
             List<EventModel> events = snapshot.data ?? [];
             return Expanded(
               child: ListView.separated(
-                padding: REdgeInsets.only(top: 20),
+                physics: const BouncingScrollPhysics(),
+                padding: REdgeInsets.symmetric(vertical: 20),
                 separatorBuilder: (context, index) => SizedBox(
                   height: 16.h,
                 ),

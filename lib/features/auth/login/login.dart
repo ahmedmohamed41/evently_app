@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:evently_app/core/UI_Utils/ui_utils.dart';
 import 'package:evently_app/core/resources/assets_manager.dart';
@@ -69,10 +68,12 @@ class _LoginState extends State<Login> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Image.asset(
-                    ImagesAssets.eventlyLogo,
-                    width: 136.w,
-                    height: 186.h,
+                  Center(
+                    child: Image.asset(
+                      ImagesAssets.eventlyLogo,
+                      width: 136.w,
+                      height: 186.h,
+                    ),
                   ),
                   SizedBox(height: 24.h),
                   CustomTextFormField(
@@ -284,7 +285,6 @@ class _LoginState extends State<Login> {
       UserModel.currentUser = await FirebaseService.getUserFromFireStore(
         userCredential.user!.uid,
       );
-
       UiUtils.hideLoading(context);
       UiUtils.showFluttertoast('User Login Successfully', Colors.green);
       Navigator.pushReplacementNamed(context, AppRoutes.mainLayout);

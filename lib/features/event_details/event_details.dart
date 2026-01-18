@@ -1,6 +1,5 @@
 import 'package:evently_app/core/UI_Utils/ui_utils.dart';
 import 'package:evently_app/core/extensions/date_ex.dart';
-import 'package:evently_app/core/resources/assets_manager.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
 import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/core/widgets/custom_navigator_location.dart';
@@ -8,8 +7,11 @@ import 'package:evently_app/features/edit_event/edit_event.dart';
 import 'package:evently_app/firebase_service/firebase_service.dart';
 import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/event_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class EventDetails extends StatelessWidget {
   const EventDetails({super.key, required this.event});
@@ -27,25 +29,30 @@ class EventDetails extends StatelessWidget {
           style: const TextStyle(fontSize: 20),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>  EditEvent(
-                    event: event,
+          Visibility(
+            visible: event.userId == FirebaseAuth.instance.currentUser!.uid,
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditEvent(
+                      event: event,
+                    ),
                   ),
-                ),
-                
-              );
-            },
-            icon: const Icon(Icons.edit),
+                );
+              },
+              icon: const Icon(Icons.edit),
+            ),
           ),
-          IconButton(
-            onPressed: () => _deleteEvent(context),
-            icon: const Icon(
-              Icons.delete,
-              color: ColorsManager.redWhite,
+          Visibility(
+            visible: event.userId == FirebaseAuth.instance.currentUser!.uid,
+            child: IconButton(
+              onPressed: () => _deleteEvent(context),
+              icon: const Icon(
+                Icons.delete,
+                color: ColorsManager.redWhite,
+              ),
             ),
           ),
         ],
@@ -67,6 +74,17 @@ class EventDetails extends StatelessWidget {
               SizedBox(
                 height: 16.h,
               ),
+              Text(
+                event.title,
+                style: GoogleFonts.inter(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w500,
+                  color: ColorsManager.blue,
+                ),
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
               CustomNavigatorLocation(
                 icon: Icons.calendar_month,
                 title: event.dateTime.formatttedDate,
@@ -81,12 +99,38 @@ class EventDetails extends StatelessWidget {
                 iconArrow: Icons.arrow_forward_ios,
               ),
               SizedBox(
-                height: 361.h,
-                width: 361.w,
+                height: 16.h,
+              ),
+              AspectRatio(
+                aspectRatio: 1,
                 child: ClipRRect(
-                  borderRadius: BorderRadiusGeometry.circular(16),
-                  child: Image.asset(ImagesAssets.location),
+                  borderRadius: BorderRadiusGeometry.circular(16.r),
+                  child: GoogleMap(
+                    zoomControlsEnabled: false,
+                    zoomGesturesEnabled: false,
+                    initialCameraPosition: CameraPosition(
+                      target: LatLng(event.latitude ?? 0, event.longitude ?? 0),
+                      zoom: 17,
+                    ),
+                    mapType: MapType.normal,
+                    markers: {
+                      Marker(
+                        markerId: const MarkerId('1'),
+                        position: LatLng(
+                          event.latitude ?? 0,
+                          event.longitude ?? 0,
+                        ),
+                        infoWindow: InfoWindow(
+                          title: event.title,
+                          snippet: '${event.city},${event.country}',
+                        ),
+                      ),
+                    },
+                  ),
                 ),
+              ),
+              SizedBox(
+                height: 16.h,
               ),
               Text(
                 'Description\n\n${event.description}',

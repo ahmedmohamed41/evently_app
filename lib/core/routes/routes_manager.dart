@@ -6,7 +6,6 @@ import 'package:evently_app/features/main_layout/main_layout.dart';
 import 'package:evently_app/features/on_boarding/onboarding_screen.dart';
 import 'package:evently_app/features/on_boarding/onboarding_screen_start.dart';
 import 'package:evently_app/features/pick_location/pick_location_screen.dart';
-import 'package:evently_app/features/pick_location/provider/pick_location_provider.dart';
 import 'package:evently_app/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,5 @@
 import 'package:evently_app/core/extensions/date_ex.dart';
 import 'package:evently_app/core/resources/colors_manager.dart';
-import 'package:evently_app/core/routes/app_routes.dart';
 import 'package:evently_app/features/event_details/event_details.dart';
 import 'package:evently_app/firebase_service/firebase_service.dart';
 import 'package:evently_app/models/event_model.dart';
