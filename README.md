@@ -1,4 +1,5 @@
 # evently_app
+<img width="1136" height="300" alt="Screenshot 2026-01-18 130509" src="https://github.com/user-attachments/assets/5ec05956-b4d0-4089-922a-c9468c446593" />
 
 A new Flutter project.
 
