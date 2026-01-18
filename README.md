@@ -67,17 +67,24 @@ Evently is a mobile application built with Flutter and Firebase, designed to hel
 - Google Maps
 
 
-
-
-| Home & Featured | Google Maps | Book Details |
+## 📸 Screenshots
+| Home & Featured | Google Maps | Favorite |
 | :-: | :-: | :-: |
 | <img src="https://github.com/user-attachments/assets/522555f3-92b2-401c-83df-1ef30eca174a" width="220" /> | <img src="https://github.com/user-attachments/assets/c6b71567-8609-438f-9d47-a6b4eb68ae99" width="220" /> | <img src="https://github.com/user-attachments/assets/fb1153b6-b2a8-43ed-ab8f-dfcc0cde85f9" width="220" /> |
 
-| Profile View | Web View | Search Results |
+| Profile View | Home & Theme | Create Event |
 | :-: | :-: | :-: |
-| <img src="https://github.com/user-attachments/assets/e0569959-def6-43cb-8cc5-9698efce03c6" width="220" /> | <img src="https://github.com/user-attachments/assets/56cacdcc-8a58-40b9-9990-195e17339818" width="220" /> | <img src="https://github.com/user-attachments/assets/7e258a3b-9936-408a-8377-ea5cfaf8dbad" width="220" /> |
-## Getting Started
+| <img src="https://github.com/user-attachments/assets/e0569959-def6-43cb-8cc5-9698efce03c6" width="220" /> | <img src="https://github.com/user-attachments/assets/bfe88cca-84ab-4a6f-bcca-2566ac2fcad2" width="220" /> | <img src="https://github.com/user-attachments/assets/c7505b2c-1bb6-4e51-ae68-5636ebcef582" width="220" /> |
 
+| Event details | Google permission | 
+| :-: | :-: | 
+| <img src="https://github.com/user-attachments/assets/4695d001-6a9a-43de-a44f-d7ac947ac9ba" width="220" /> | <img src="https://github.com/user-attachments/assets/944acec6-cf9a-41d9-9734-f92043679da6" width="220" /> |
+
+## Getting Started
+- Clone the repository
+- Install dependencies
+  * flutter pub get
+- Run the app flutter run   
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
